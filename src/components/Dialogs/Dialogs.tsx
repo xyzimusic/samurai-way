@@ -1,48 +1,92 @@
-import React, {FC} from 'react';
-import {NavLink} from 'react-router-dom';
+import React from 'react';
 import s from './Dialogs.module.css'
+import {DialogItem, DialogItemType} from './DialogItem/DialogItem';
+import {Message, MessageType} from './Message/Message';
 
+export const Dialogs = (props:any) => {
 
-export type DialogItemType = {
-    id: string
-    name: string
-}
-const DialogItem: FC<DialogItemType> = (props) => {
-    const {name, id} = props
-    let path = `/dialogs/${id}`
-    return (
-        <div className={s.dialog + ' ' + s.active}>
-            <NavLink to={path}>{name}</NavLink>
-        </div>
-    )
-}
+    /**
+     * BLL - bussines logical layer
+     */
+    let dialogs: DialogItemType[] =
+        [
+            {
+                id: 1,
+                name: 'Dymich'
+            }
+            ,
+            {
+                id: 2,
+                name: 'Andrew'
+            }
+            ,
+            {
+                id: 3,
+                name: 'Sveta'
+            }
+            ,
+            {
+                id: 4,
+                name: 'Sasha'
+            }
+            ,
+            {
+                id: 5,
+                name: 'Victor'
+            }
+            ,
+            {
+                id: 6,
+                name: 'Valera'
+            }
+        ]
 
-export type MessageType = {
-    text: string
-}
-const Message:FC<MessageType> =(props) =>{
-    const {text} = props
-    return(
-        <div className={s.message}>{text}</div>
-    )
-}
+    let dialogsElements =
+        dialogs.map((el) => <DialogItem name={el.name} id={el.id}></DialogItem>)
 
-export const Dialogs = () => {
+    let messages: MessageType[] =
+        [
+            {
+                id: 1,
+                message: 'Hi!!!'
+            }
+            ,
+            {
+                id: 2,
+                message: 'Hello, bro <3'
+            }
+            ,
+            {
+                id: 3,
+                message: 'How is your day?'
+            }
+            ,
+            {
+                id: 4,
+                message: 'YOiu'
+            }
+            ,
+            {
+                id: 5,
+                message: 'Yo'
+            }
+            ,
+            {
+                id: 6,
+                message: 'Yo'
+            }
+        ]
+
+    let messagesElements =
+        messages.map((el) => <Message message={el.message} id={el.id}></Message>)
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DialogItem name={'Dimych'} id="1"></DialogItem>
-                <DialogItem name={'Andrey'} id="2"></DialogItem>
-                <DialogItem name={'Sveta'} id="3"></DialogItem>
-                <DialogItem name={'Sasha'} id="4"></DialogItem>
-                <DialogItem name={'Victor'} id="5"></DialogItem>
-                <DialogItem name={'Valera'} id="6"></DialogItem>
+                {dialogsElements}
             </div>
             <div className={s.messages}>
-                <Message text={'Hi'}></Message>
-                <Message text={'Hi Hi'}></Message>
-                <Message text={'How is your it-kavasutra'}></Message>
-                <Message text={'yo'}></Message>
+                {messagesElements}
             </div>
         </div>
     );

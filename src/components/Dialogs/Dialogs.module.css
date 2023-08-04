@@ -8,11 +8,11 @@
 }
 
 .dialogsItems .active {
-  color: gold;
+    color: gold;
 }
 
 .messages {
-padding: 10px;
+    padding: 10px;
 }
 
 .messages .message {

@@ -1,9 +1,28 @@
 import React from 'react';
 import s from './MyPosts.module.css'
-import Post from './Post/Post';
-
+import Post, {PostPropsType} from './Post/Post';
 
 const MyPosts = () => {
+
+    let posts: PostPropsType[] =
+        [
+            {
+                id: 1,
+                message: 'hello, How r u ?',
+                likesCount: 11
+            }
+            ,
+            {
+                id: 2,
+                message: 'Its my first post',
+                likesCount: 12
+            }
+        ]
+
+
+    let postsElements =
+        posts.map((el)=> <Post message={el.message} likesCount={el.likesCount} id={el.id}></Post>)
+
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
@@ -16,8 +35,8 @@ const MyPosts = () => {
                 </div>
             </div>
             <div className={s.posts}>
-                <Post message={'Hi, How are u?'} likesCount="23"></Post>
-                <Post message={'It`s my first post'} likesCount="0"></Post>
+                {postsElements}
+
             </div>
         </div>
     );
