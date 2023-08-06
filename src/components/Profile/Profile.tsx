@@ -3,12 +3,14 @@ import s from './Profile.module.css'
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import {PostPropsType} from './MyPosts/Post/Post';
+import {ProfilePageType} from '../../redux/state';
 
 type ProfilePropsType = {
-    posts: PostPropsType[]
+    profilePage: ProfilePageType
 }
 const Profile: FC<ProfilePropsType> = (props) => {
-    const {posts} = props
+    const {profilePage} = props
+    const {posts} = profilePage
 
     return (
         <div className={s.content}>
