@@ -3,13 +3,14 @@ import {MessageType} from '../components/Dialogs/Message/Message';
 import {PostPropsType} from '../components/Profile/MyPosts/Post/Post';
 import {stat} from 'fs';
 
-let rerenderEntireTree = (state:StateType) =>{
+
+let rerenderEntireTree = () => {
     console.log('state changed')
 }
 
 export type ProfilePageType = {
     posts: PostPropsType[]
-    newPostText:string
+    newPostText: string
 }
 export type  DialogsPageType = {
     dialogs: DialogItemType[]
@@ -23,6 +24,7 @@ export type StateType = {
 /**
  * BLL - Business Logic Layer
  */
+
 let dialogs: DialogItemType[] =
     [
         {
@@ -107,7 +109,7 @@ let messages: MessageType[] =
 export let state: StateType = {
     profilePage: {
         posts: [...posts],
-        newPostText:'it-kama'
+        newPostText: 'it-kama'
     },
     dialogsPage: {
         dialogs: [...dialogs],
@@ -117,24 +119,73 @@ export let state: StateType = {
 
 export const addPost = () => {
 
-    let newPost:PostPropsType = {
-        id:5,
-        message:state.profilePage.newPostText,
-        likesCount:0
+    let newPost: PostPropsType = {
+        id: 5,
+        message: state.profilePage.newPostText,
+        likesCount: 0
     }
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = ''
 
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
-export const updateNewPostText = (newPostTitle:string) => {
+export const updateNewPostText = (newPostTitle: string) => {
 
     state.profilePage.newPostText = newPostTitle
 
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
-export const subcribe =(observer:any)=>{
+export const subcribe = (observer:()=>void) => {
     rerenderEntireTree = observer
+}
+
+export type StoreType = {
+    _state: StateType,
+    addPost: () => void
+    updateNewPostText: (newPostTitle: string) => void
+    subcribe: (observer: any) => void
+    getState: () => void
+    rerenderEntireTree: () => void
+}
+
+export let store: StoreType = {
+    _state: {
+        profilePage: {
+            posts: [...posts],
+            newPostText: 'it-kama'
+        },
+        dialogsPage: {
+            dialogs: [...dialogs],
+            messages: [...messages],
+        }
+    },
+    rerenderEntireTree() {
+        console.log('state changed')
+    },
+
+    addPost() {
+        let newPost = {
+            id: 5,
+            message:    this._state.profilePage.newPostText,
+            likesCount: 0
+        }
+        this._state.profilePage.posts.push(newPost)
+        this._state.profilePage.newPostText = ''
+        this.rerenderEntireTree()
+    },
+
+    updateNewPostText(newPostTitle) {
+        this._state.profilePage.newPostText = newPostTitle
+        this.rerenderEntireTree()
+    },
+
+    subcribe(observer) {
+        this.rerenderEntireTree = observer
+    },
+
+    getState() {
+        return this._state
+    }
 }

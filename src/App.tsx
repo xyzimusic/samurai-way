@@ -5,17 +5,15 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import {BrowserRouter, Route} from 'react-router-dom';
-import {addPost, StateType, updateNewPostText} from './redux/state';
+import {store, StoreType} from './redux/state';
 
 
 type AppPropsType = {
-    state: StateType
-    addPost: () => void
-    updateNewPostText: (newPostTitle: string) => void
+   store:StoreType
 }
 const App: FC<AppPropsType> = (props) => {
-    const {state, addPost} = props
-    const {profilePage, dialogsPage} = state
+    const {_state, addPost,updateNewPostText} = props.store
+    const {profilePage, dialogsPage} = _state
 
     return (
         <BrowserRouter>
