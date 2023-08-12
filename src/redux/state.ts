@@ -1,10 +1,15 @@
 import {DialogItemType} from '../components/Dialogs/DialogItem/DialogItem';
 import {MessageType} from '../components/Dialogs/Message/Message';
 import {PostPropsType} from '../components/Profile/MyPosts/Post/Post';
-import {rerenderEntireTree} from '../render';
+import {stat} from 'fs';
+
+let rerenderEntireTree = (state:StateType) =>{
+    console.log('state changed')
+}
 
 export type ProfilePageType = {
     posts: PostPropsType[]
+    newPostText:string
 }
 export type  DialogsPageType = {
     dialogs: DialogItemType[]
@@ -102,6 +107,7 @@ let messages: MessageType[] =
 export let state: StateType = {
     profilePage: {
         posts: [...posts],
+        newPostText:'it-kama'
     },
     dialogsPage: {
         dialogs: [...dialogs],
@@ -109,14 +115,26 @@ export let state: StateType = {
     }
 }
 
-export const addPost = (newPostTitle:string) => {
+export const addPost = () => {
 
     let newPost:PostPropsType = {
         id:5,
-        message:newPostTitle,
+        message:state.profilePage.newPostText,
         likesCount:0
     }
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ''
 
     rerenderEntireTree(state)
+}
+
+export const updateNewPostText = (newPostTitle:string) => {
+
+    state.profilePage.newPostText = newPostTitle
+
+    rerenderEntireTree(state)
+}
+
+export const subcribe =(observer:any)=>{
+    rerenderEntireTree = observer
 }
