@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import s from './MyPosts.module.css'
 import Post, {PostPropsType} from './Post/Post';
-import {state} from '../../../redux/state';
 
 type  MyPostsPropsType = {
     posts: PostPropsType[]
@@ -18,7 +17,9 @@ const MyPosts: FC<MyPostsPropsType> = (props) => {
 
     const addPostHandler = () => {
         if (newPostElement.current) {
+            console.log('add post')
             addPost(newPostElement.current.value)
+            newPostElement.current.value = ''
         }
     }
 
