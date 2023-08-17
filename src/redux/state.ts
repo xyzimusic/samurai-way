@@ -1,10 +1,9 @@
 import {DialogItemType} from '../components/Dialogs/DialogItem/DialogItem';
 import {MessageType} from '../components/Dialogs/Message/Message';
 import {PostPropsType} from '../components/Profile/MyPosts/Post/Post';
-import {stat} from 'fs';
 
 
-let rerenderEntireTree = () => {
+let rerenderEntireTree = (state: StateType) => {
     console.log('state changed')
 }
 
@@ -127,17 +126,17 @@ export const addPost = () => {
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = ''
 
-    rerenderEntireTree()
+    rerenderEntireTree(state)
 }
 
 export const updateNewPostText = (newPostTitle: string) => {
 
     state.profilePage.newPostText = newPostTitle
 
-    rerenderEntireTree()
+    rerenderEntireTree(state)
 }
 
-export const subcribe = (observer:()=>void) => {
+export const subcribe = (observer: () => void) => {
     rerenderEntireTree = observer
 }
 
@@ -145,9 +144,9 @@ export type StoreType = {
     _state: StateType,
     addPost: () => void
     updateNewPostText: (newPostTitle: string) => void
-    subcribe: (observer: any) => void
-    getState: () => void
-    rerenderEntireTree: () => void
+    subscribe: (observer: any) => void
+    getState: () => StateType
+    _callSubscriber: () => void
 }
 
 export let store: StoreType = {
@@ -161,28 +160,28 @@ export let store: StoreType = {
             messages: [...messages],
         }
     },
-    rerenderEntireTree() {
+    _callSubscriber() {
         console.log('state changed')
     },
 
     addPost() {
         let newPost = {
             id: 5,
-            message:    this._state.profilePage.newPostText,
+            message: this._state.profilePage.newPostText,
             likesCount: 0
         }
         this._state.profilePage.posts.push(newPost)
         this._state.profilePage.newPostText = ''
-        this.rerenderEntireTree()
+        this._callSubscriber()
     },
 
     updateNewPostText(newPostTitle) {
         this._state.profilePage.newPostText = newPostTitle
-        this.rerenderEntireTree()
+        this._callSubscriber()
     },
 
-    subcribe(observer) {
-        this.rerenderEntireTree = observer
+    subscribe(observer) {
+        this._callSubscriber = observer
     },
 
     getState() {
