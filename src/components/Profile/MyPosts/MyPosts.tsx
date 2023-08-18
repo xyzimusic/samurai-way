@@ -1,13 +1,20 @@
 import React, {FC} from 'react';
 import s from './MyPosts.module.css'
 import Post, {PostPropsType} from './Post/Post';
-import {ActionsType, AddPostActionType, UpdateNewPostTextActionType} from '../../../redux/state';
+import {
+    ActionsType,
+    addPostAC,
+    AddPostActionType,
+    updateNewPostTextAC,
+    UpdateNewPostTextActionType
+} from '../../../redux/state';
 
 type  MyPostsPropsType = {
     posts: PostPropsType[]
     newPostText: string
     dispatch: (action: ActionsType) => void
 }
+
 
 export const MyPosts: FC<MyPostsPropsType> = (props) => {
     const {posts, newPostText, dispatch} = props
@@ -20,16 +27,15 @@ export const MyPosts: FC<MyPostsPropsType> = (props) => {
     const addPostHandler = () => {
         if (newPostElement.current) {
             console.log('add post')
-            const action: AddPostActionType= {type: 'ADD-POST', postText: newPostText};
-            dispatch(action)
+            // const action: AddPostActionType= {type: 'ADD-POST', postText: newPostText};
+            dispatch(addPostAC(newPostText))
         }
 
     }
 
     let onPostChange = () => {
         let text = newPostElement.current ? newPostElement.current.value : ''
-        const action:UpdateNewPostTextActionType = {type: 'UPDATE-NEW-POST-TEXT', newText: text};
-        dispatch(action)
+        dispatch(updateNewPostTextAC(text))
     }
     return (
         <div className={s.postsBlock}>
