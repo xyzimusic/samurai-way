@@ -17,7 +17,7 @@ const App: FC<AppPropsType> = (props) => {
     const {profilePage, dialogsPage} = state
 
     return (
-        <BrowserRouter>
+
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
@@ -29,7 +29,6 @@ const App: FC<AppPropsType> = (props) => {
                 </div>
             </div>
 
-        </BrowserRouter>
     );
 }
 
