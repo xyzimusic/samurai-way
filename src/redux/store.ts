@@ -1,18 +1,12 @@
 import {DialogItemType} from '../components/Dialogs/DialogItem/DialogItem';
 import {MessageType} from '../components/Dialogs/Message/Message';
 import {PostPropsType} from '../components/Profile/MyPosts/Post/Post';
-import {ADD_POST, addPostAC, profileReducer, UPDATE_NEW_POST_TEXT, updateNewPostTextAC} from './profile-reducer';
-import {
-    dialogsReducer,
-    SEND_MESSAGE,
-    sendMessageAC,
-    UPDATE_NEW_MESSAGE_BODY,
-    updateNewMessageBodyAC
-} from './dialogs-reducer';
+import {addPostAC, profileReducer, updateNewPostTextAC} from './profile-reducer';
+import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from './dialogs-reducer';
 import {sideBarReducer} from './sidebar-reducer';
 
 let rerenderEntireTree = (state: StateType) => {
-    console.log('state changed')
+    console.log('store changed')
 }
 
 export type ProfilePageType = {
@@ -118,37 +112,6 @@ let messages: MessageType[] =
         }
     ]
 
-export let state: StateType = {
-    profilePage: {
-        posts: [...posts],
-        newPostText: 'it-kama'
-    },
-    dialogsPage: {
-        dialogs: [...dialogs],
-        messages: [...messages],
-        newMessageBody: ''
-    },
-    sideBar:{}
-}
-
-export const addPost = () => {
-
-    let newPost: PostPropsType = {
-        id: 5,
-        message: state.profilePage.newPostText,
-        likesCount: 0
-    }
-    state.profilePage.posts.push(newPost)
-    state.profilePage.newPostText = ''
-
-    rerenderEntireTree(state)
-}
-
-export const updateNewPostText = (newPostTitle: string) => {
-    state.profilePage.newPostText = newPostTitle
-    rerenderEntireTree(state)
-}
-
 export const subcribe = (observer: () => void) => {
     rerenderEntireTree = observer
 }
@@ -166,7 +129,6 @@ export type StoreType = {
 export type AddPostActionType = ReturnType<typeof addPostAC>
 export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
 export type UpdateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
-
 export type SendMessageActionType = ReturnType<typeof sendMessageAC>
 
 
@@ -197,7 +159,7 @@ export let store: StoreType = {
     },
 
     _callSubscriber() {
-        console.log('state changed')
+        console.log('store changed')
     },
 
     addPost() {

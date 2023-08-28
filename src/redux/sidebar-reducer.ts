@@ -1,4 +1,4 @@
-import {ActionsType, SideBarType} from './state';
+import {ActionsType, SideBarType} from './store';
 
 
 export type ProfileActionsType = {}
