@@ -5,11 +5,9 @@ import {Message, MessageType} from './Message/Message';
 import {
     ActionsType,
     DialogsPageType,
-    sendMessageAC,
     state, StoreType,
-    updateNewMessageBodyAC,
-    updateNewPostTextAC
 } from '../../redux/state';
+import {sendMessageAC, updateNewMessageBodyAC} from '../../redux/dialogs-reducer';
 
 type DialogsPropsType = {
     // dialogsPage?: DialogsPageType
