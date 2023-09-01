@@ -4,7 +4,7 @@ import {DialogItem, DialogItemType} from './DialogItem/DialogItem';
 import {Message, MessageType} from './Message/Message';
 import {
     ActionsType,
-    DialogsPageType,
+    DialogsPageType, StateType,
     store, StoreType,
 } from '../../redux/store';
 import {sendMessageAC, updateNewMessageBodyAC} from '../../redux/dialogs-reducer';
@@ -12,8 +12,10 @@ import {sendMessageAC, updateNewMessageBodyAC} from '../../redux/dialogs-reducer
 type DialogsPropsType = {
     // dialogsPage?: DialogsPageType
     // dispatch?: (action: ActionsType) => void
-    store: StoreType
+    store: any
 }
+
+
 
 export const Dialogs: FC<DialogsPropsType> = (props) => {
 

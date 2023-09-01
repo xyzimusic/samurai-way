@@ -112,6 +112,37 @@ let messages: MessageType[] =
         }
     ]
 
+// export let store: StateType = {
+//     profilePage: {
+//         posts: [...posts],
+//         newPostText: 'it-kama'
+//     },
+//     dialogsPage: {
+//         dialogs: [...dialogs],
+//         messages: [...messages],
+//         newMessageBody: ''
+//     },
+//     sideBar:{}
+// }
+
+// export const addPost = () => {
+//
+//     let newPost: PostPropsType = {
+//         id: 5,
+//         message: store.profilePage.newPostText,
+//         likesCount: 0
+//     }
+//     store.profilePage.posts.push(newPost)
+//     store.profilePage.newPostText = ''
+//
+//     rerenderEntireTree(store)
+// }
+
+// export const updateNewPostText = (newPostTitle: string) => {
+//     store.profilePage.newPostText = newPostTitle
+//     rerenderEntireTree(store)
+// }
+
 export const subcribe = (observer: () => void) => {
     rerenderEntireTree = observer
 }
