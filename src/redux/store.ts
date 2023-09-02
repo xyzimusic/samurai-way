@@ -14,8 +14,7 @@ export type ProfilePageType = {
     newPostText: string
 }
 
-export type SideBarType = {
-}
+export type SideBarType = {}
 export type  DialogsPageType = {
     dialogs: DialogItemType[]
     messages: MessageType[]
@@ -24,7 +23,7 @@ export type  DialogsPageType = {
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
-    sideBar:SideBarType
+    sideBar: SideBarType
 }
 
 /**
@@ -179,7 +178,7 @@ export let store: StoreType = {
             messages: [...messages],
             newMessageBody: ''
         },
-        sideBar:{}
+        sideBar: {}
     },
     subscribe(observer) {
         this._callSubscriber = observer
@@ -211,9 +210,9 @@ export let store: StoreType = {
 
     dispatch(action) {
 
-        this._state.profilePage = profileReducer(this._state.profilePage,action)
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage,action)
-        this._state.sideBar = sideBarReducer(this._state.sideBar,action)
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sideBar = sideBarReducer(this._state.sideBar, action)
 
         this._callSubscriber()
     }

@@ -1,11 +1,10 @@
-import {ActionsType, DialogsPageType, ProfilePageType} from './store';
+import {ActionsType, DialogsPageType} from './store';
 
 export const SEND_MESSAGE = 'SEND-MESSAGE'
 export const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 
-
 let initialState: DialogsPageType = {
-    dialogs:  [
+    dialogs: [
         {
             id: 1,
             name: 'Dymich'
@@ -36,7 +35,7 @@ let initialState: DialogsPageType = {
             name: 'Valera'
         }
     ],
-    messages:  [
+    messages: [
         {
             id: 1,
             message: 'Hi!!!'
