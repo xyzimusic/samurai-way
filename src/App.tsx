@@ -19,8 +19,8 @@ const App: FC<AppPropsType> = (props) => {
             <div className="app-wrapper-content">
                 {/*<Route component={Dialogs} path="/dialogs"/>*/}
                 {/*<Route component={Profile} path="/profile"/>*/}
-                <Route render={() => <DialogsContainer store={reduxStore}/>} path="/dialogs"/>
-                <Route render={() => <Profile store={reduxStore}/>} path="/profile"/>
+                <Route render={() => <DialogsContainer/>} path="/dialogs"/>
+                <Route render={() => <Profile/>} path="/profile"/>
             </div>
         </div>
     );
