@@ -6,11 +6,11 @@ import Profile from './components/Profile/Profile';
 import {Route} from 'react-router-dom';
 import {reduxStore} from './redux/redux-store';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
-
+//Store<EmptyObject, AnyAction>
 type AppPropsType = {
-    store: any
+
 }
-const App: FC<AppPropsType> = (props) => {
+const App: FC<AppPropsType> = () => {
     return (
         <div className="app-wrapper">
             <Header/>

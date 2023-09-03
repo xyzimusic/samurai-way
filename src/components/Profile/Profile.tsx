@@ -11,7 +11,7 @@ const Profile: FC<ProfilePropsType> = (props) => {
     return (
         <div className={s.content}>
             <ProfileInfo></ProfileInfo>
-            <MyPostsContainer></MyPostsContainer>
+            <MyPostsContainer/>
         </div>
     );
 };
