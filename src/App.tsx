@@ -12,7 +12,6 @@ type AppPropsType = {
 }
 const App: FC<AppPropsType> = (props) => {
     return (
-
         <div className="app-wrapper">
             <Header/>
             <Navbar/>
