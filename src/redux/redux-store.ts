@@ -16,5 +16,4 @@ export type ReduxStoreType = {
     updateNewPostText: (newPostTitle: string) => void
 }
 
-// @ts-ignore
 export let reduxStore = createStore(reducers)
