@@ -1,9 +1,11 @@
 import {ActionsType, DialogsPageType} from './store';
+import {DialogItemType} from '../components/Dialogs/DialogItem/DialogItem';
+import {MessageType} from '../components/Dialogs/Message/Message';
 
 export const SEND_MESSAGE = 'SEND-MESSAGE'
 export const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 
-let initialState: DialogsPageType = {
+let initialState = {
     dialogs: [
         {
             id: 1,
@@ -34,7 +36,7 @@ let initialState: DialogsPageType = {
             id: 6,
             name: 'Valera'
         }
-    ],
+    ] as DialogItemType[],
     messages: [
         {
             id: 1,
@@ -65,11 +67,13 @@ let initialState: DialogsPageType = {
             id: 6,
             message: 'Yo'
         }
-    ],
+    ] as  MessageType[],
     newMessageBody: ''
 }
 
-export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType) => {
+export type InitialStateType = typeof initialState
+
+export const dialogsReducer = (state: InitialStateType = initialState, action: ActionsType):InitialStateType => {
 
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY: {

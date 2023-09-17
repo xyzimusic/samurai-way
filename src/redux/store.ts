@@ -4,6 +4,11 @@ import {PostPropsType} from '../components/Profile/MyPosts/Post/Post';
 import {addPostAC, profileReducer, updateNewPostTextAC} from './profile-reducer';
 import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from './dialogs-reducer';
 import {sideBarReducer} from './sidebar-reducer';
+import {
+    followAC, setUsersAC,
+    unfollowAC,
+    UserType
+} from './users-reducer';
 
 let rerenderEntireTree = (state: StateType) => {
     console.log('store changed')
@@ -20,10 +25,15 @@ export type  DialogsPageType = {
     messages: MessageType[]
     newMessageBody: string
 }
+
+export type UsersPage = {
+    users: UserType[]
+}
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sideBar: SideBarType
+    usersPage: UsersPage
 }
 
 /**
@@ -129,12 +139,17 @@ export type AddPostActionType = ReturnType<typeof addPostAC>
 export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
 export type UpdateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
 export type SendMessageActionType = ReturnType<typeof sendMessageAC>
-
+export type FollowActionType = ReturnType<typeof followAC>
+export type UnFollowActionType = ReturnType<typeof unfollowAC>
+export type SetUsersACActionType = ReturnType<typeof setUsersAC>
 
 export type ActionsType = AddPostActionType
     | UpdateNewPostTextActionType
     | UpdateNewMessageBodyActionType
     | SendMessageActionType
+    | FollowActionType
+    | UnFollowActionType
+    | SetUsersACActionType
 
 export let store: StoreType = {
     _state: {
@@ -147,7 +162,10 @@ export let store: StoreType = {
             messages: [...messages],
             newMessageBody: ''
         },
-        sideBar: {}
+        sideBar: {},
+        usersPage: {
+            users: []
+        }
     },
     subscribe(observer) {
         this._callSubscriber = observer

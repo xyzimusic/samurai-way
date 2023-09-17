@@ -3,17 +3,21 @@ import {sideBarReducer} from './sidebar-reducer';
 import {dialogsReducer} from './dialogs-reducer';
 import {profileReducer} from './profile-reducer';
 import {StateType} from './store';
+import {usersReducer} from './users-reducer';
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
-    sidebar: sideBarReducer
+    sidebar: sideBarReducer,
+    usersPage: usersReducer
 })
 
-export type ReduxStoreType = {
-    _state: StateType,
-    addPost: () => void
-    updateNewPostText: (newPostTitle: string) => void
-}
+export type AppStateStoreType = ReturnType<typeof rootReducer>
 
-export let reduxStore = createStore(reducers)
+// export type ReduxStoreType = {
+//     _state: StateType,
+//     addPost: () => void
+//     updateNewPostText: (newPostTitle: string) => void
+// }
+
+export let reduxStore = createStore(rootReducer)
