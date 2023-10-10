@@ -1,16 +1,25 @@
 import React, {FC} from 'react';
 import styles from './users.module.css'
 import {UserType} from '../../redux/users-reducer';
+import axios from 'axios';
 
 type PropsUsersType = {
-    follow:(userId:number)=>void
-    unFollow:(userId:number)=>void
-    users:UserType[]
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
+    users: UserType[]
+    setUsers: (users: UserType[]) => void
 }
 
 //UsersPropsType
 export const Users: FC<PropsUsersType> = (props) => {
-    console.log('должен засететаться')
+    if (props.users.length === 0) {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then((response) => {
+                console.log(response.data.items)
+                props.setUsers(response.data.items)
+            })
+        console.log('должен засететаться')
+    }
     // if (props.users.length === 0) {
     //     props.setUsers(
     //         [
@@ -73,7 +82,7 @@ export const Users: FC<PropsUsersType> = (props) => {
                         <div>
                             <img
                                 className={styles.userPhoto}
-                                src={u.photoUrl}
+                                src={u.photos?.small ? u.photos.small : 'https://kokoroplanner.com/wp-content/uploads/2019/07/iconfinder_woman5_2758862-150x150.png'}
                                 alt=""/>
                         </div>
                         <div>
@@ -95,7 +104,7 @@ export const Users: FC<PropsUsersType> = (props) => {
                     <span>
                         <span>
                           <div>
-                                {u.fullName}
+                                {u.name}
                           </div>
                           <div>
                                 {u.status}
@@ -103,10 +112,10 @@ export const Users: FC<PropsUsersType> = (props) => {
                         </span>
                         <span>
                               <div>
-                                {u.location.country}
+                                {'u.location.country'}
                              </div>
                              <div>
-                                {u.location.city}
+                                {'u.location.city'}
                              </div>
                         </span>
                     </span>
