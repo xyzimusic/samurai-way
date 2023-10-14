@@ -12,70 +12,21 @@ type PropsUsersType = {
 
 //UsersPropsType
 export const Users: FC<PropsUsersType> = (props) => {
-    if (props.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then((response) => {
-                console.log(response.data.items)
-                props.setUsers(response.data.items)
-            })
-        console.log('должен засететаться')
+    let getUsrs = () => {
+
+        if (props.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users')
+                .then((response) => {
+                    console.log(response.data.items)
+                    props.setUsers(response.data.items)
+                })
+            console.log('должен засететаться')
+        }
     }
-    // if (props.users.length === 0) {
-    //     props.setUsers(
-    //         [
-    //             {
-    //                 id: 1,
-    //                 photoUrl: 'https://kokoroplanner.com/wp-content/uploads/2019/07/iconfinder_woman5_2758862-150x150.png',
-    //                 followed: true,
-    //                 fullName: 'Ilya S.',
-    //                 status: 'wake up!',
-    //                 location: {
-    //                     city: 'Minsk',
-    //                     country: 'Belarus'
-    //                 }
-    //             }
-    //             ,
-    //             {
-    //                 id: 2,
-    //                 photoUrl: 'https://kokoroplanner.com/wp-content/uploads/2019/07/iconfinder_woman5_2758862-150x150.png',
-    //                 followed: true,
-    //                 fullName: 'Nastya F.',
-    //                 status: '<3',
-    //                 location: {
-    //                     city: 'Moscow',
-    //                     country: 'Russia'
-    //                 }
-    //             }
-    //             ,
-    //             {
-    //                 id: 3,
-    //                 photoUrl: 'https://kokoroplanner.com/wp-content/uploads/2019/07/iconfinder_woman5_2758862-150x150.png',
-    //                 followed: false,
-    //                 fullName: 'Nadya J.',
-    //                 status: 'sleep now',
-    //                 location: {
-    //                     city: 'Kiev',
-    //                     country: 'Ukraine'
-    //                 }
-    //             }
-    //             ,
-    //             {
-    //                 id: 4,
-    //                 photoUrl: 'https://kokoroplanner.com/wp-content/uploads/2019/07/iconfinder_woman5_2758862-150x150.png',
-    //                 followed: false,
-    //                 fullName: 'Andrew K.',
-    //                 status: 'work work work',
-    //                 location: {
-    //                     city: 'New York',
-    //                     country: 'USA'
-    //                 }
-    //             }
-    //         ]
-    //     )
-    // }
 
     return (
         <div>
+            <button onClick={getUsrs}>getUsers</button>
             {
                 props.users.map((u: UserType) => <div key={u.id}>
                     <span>
