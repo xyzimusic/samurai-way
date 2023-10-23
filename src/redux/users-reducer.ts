@@ -3,61 +3,21 @@ import {ActionsType} from './store';
 export const FOLLOW = 'FOLLOW'
 export const UNFOLLOW = 'UNFOLLOW'
 export const SET_USERS = 'SET_USERS'
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+export const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 
 export type InitialStateType = {
     users: UserType[]
+    pageSize: number,
+    totalUsersCount: number
+    currentPage: number
 }
 
 let initialState: InitialStateType = {
-    users: [
-        // {
-        //     id: 1,
-        //     photoUrl: 'https://kokoroplanner.com/wp-content/uploads/2019/07/iconfinder_woman5_2758862-150x150.png',
-        //     followed: true,
-        //     fullName: 'Ilya S.',
-        //     status: 'wake up!',
-        //     location: {
-        //         city: 'Minsk',
-        //         country: 'Belarus'
-        //     }
-        // }
-        // ,
-        // {
-        //     id: 2,
-        //     photoUrl: 'https://kokoroplanner.com/wp-content/uploads/2019/07/iconfinder_woman5_2758862-150x150.png',
-        //     followed: true,
-        //     fullName: 'Nastya F.',
-        //     status: '<3',
-        //     location: {
-        //         city: 'Moscow',
-        //         country: 'Russia'
-        //     }
-        // }
-        // ,
-        // {
-        //     id: 3,
-        //     photoUrl: 'https://kokoroplanner.com/wp-content/uploads/2019/07/iconfinder_woman5_2758862-150x150.png',
-        //     followed: false,
-        //     fullName: 'Nadya J.',
-        //     status: 'sleep now',
-        //     location: {
-        //         city: 'Kiev',
-        //         country: 'Ukraine'
-        //     }
-        // }
-        // ,
-        // {
-        //     id: 4,
-        //     photoUrl: 'https://kokoroplanner.com/wp-content/uploads/2019/07/iconfinder_woman5_2758862-150x150.png',
-        //     followed: false,
-        //     fullName: 'Andrew K.',
-        //     status: 'work work work',
-        //     location: {
-        //         city: 'New York',
-        //         country: 'USA'
-        //     }
-        // }
-    ],
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 2
 }
 
 export type UserType = {
@@ -70,15 +30,13 @@ export type UserType = {
         city: string
         // country: string
     }
-    photos?:{
-        small:string,
-        large:string
+    photos?: {
+        small: string,
+        large: string
     }
 }
 
-
-
-export const usersReducer = (state:InitialStateType = initialState, action: ActionsType):InitialStateType => {
+export const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
 
     switch (action.type) {
 
@@ -98,10 +56,17 @@ export const usersReducer = (state:InitialStateType = initialState, action: Acti
             }
         }
         case SET_USERS: {
+            return {
+                ...state,
+                users: action.users
+            }
+        }
 
-            return {...state,
-                 users: [...state.users, ...action.users]}
-
+        case SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.currentPage}
+        }
+        case SET_TOTAL_USERS_COUNT: {
+            return {...state, totalUsersCount: action.totalUsersCount}
         }
         default:
             return state
@@ -117,4 +82,9 @@ export const followAC = (userId: number) => {
 
 export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const)
 export const setUsersAC = (users: UserType[]) => ({type: SET_USERS, users} as const)
+export const setCurrentPageAC = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
+export const setTotalUsersCountAC = (totalUsersCount: number) => ({
+    type: SET_TOTAL_USERS_COUNT,
+    totalUsersCount
+} as const)
 

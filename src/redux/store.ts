@@ -4,11 +4,7 @@ import {PostPropsType} from '../components/Profile/MyPosts/Post/Post';
 import {addPostAC, profileReducer, updateNewPostTextAC} from './profile-reducer';
 import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from './dialogs-reducer';
 import {sideBarReducer} from './sidebar-reducer';
-import {
-    followAC, setUsersAC,
-    unfollowAC,
-    UserType
-} from './users-reducer';
+import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC, UserType} from './users-reducer';
 
 let rerenderEntireTree = (state: StateType) => {
     console.log('store changed')
@@ -142,6 +138,8 @@ export type SendMessageActionType = ReturnType<typeof sendMessageAC>
 export type FollowActionType = ReturnType<typeof followAC>
 export type UnFollowActionType = ReturnType<typeof unfollowAC>
 export type SetUsersACActionType = ReturnType<typeof setUsersAC>
+export type setCurrentPageACActionType = ReturnType<typeof setCurrentPageAC>
+export type setTotalUsersCountACActionType = ReturnType<typeof setTotalUsersCountAC>
 
 export type ActionsType = AddPostActionType
     | UpdateNewPostTextActionType
@@ -150,6 +148,8 @@ export type ActionsType = AddPostActionType
     | FollowActionType
     | UnFollowActionType
     | SetUsersACActionType
+    | setCurrentPageACActionType
+    | setTotalUsersCountACActionType
 
 export let store: StoreType = {
     _state: {
