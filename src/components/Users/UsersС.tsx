@@ -12,8 +12,7 @@ type PropsUsersType = {
 
 export class UsersC extends React.Component<PropsUsersType> {
 
-    constructor(props: PropsUsersType) {
-        super(props);
+    componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0/users')
             .then((response) => {
                 console.log(response.data.items)
